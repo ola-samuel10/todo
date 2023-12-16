@@ -1,10 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo/todoadapter.dart';
 import 'package:todo/todolist_model.dart';
 import 'package:todo/todolist_services.dart';
+
+import 'box.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -22,6 +26,41 @@ class _HomepageState extends State<Homepage> {
   ];
 
   int seletesCategories = 0;
+  //  List _todos = [];
+  // final addedsTodo  = Hive.box('settings');
+
+  // @override
+  // void initState() {
+  //  // _refreshTodo();
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
+
+// void _refreshTodo({title, body}){
+//   final data = addedsTodo.keys.map((key)  {
+//      Random random = Random();
+//     DateTime dates = DateTime.now();
+// final todos =addedsTodo.get(key);
+// print("hello mmii");
+
+// print(_todos);
+// return {
+//   'key': key, 'title': todos['title'], "body": todos["body"]
+// };
+//   }).toList();
+//   print(data);
+//   print("hello hii");
+//   setState(() {
+//     _todos = data.reversed.toList();
+//     print(_todos.length);
+//   });
+// }
+// Future<void> _createdTodo(Map<String, dynamic> newtodo) async {
+//     await addedsTodo.add(newtodo);
+//     print(addedsTodo);
+//     print('hiii${addedsTodo.length}');
+//    // _refreshTodo( );
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -68,17 +107,18 @@ class _HomepageState extends State<Homepage> {
             Consumer<TodolistServices>(
               builder: (context, state, index) {
                 // 30/09/2021
-      
+
                 var value =
                     state.todo.where((item) => item.todoChecker == true).length;
                 var values = state.todo
                     .where((item) => item.todoChecker == false)
                     .length;
+
                 //bool todo = state.todo[index].todoChecker == true;
                 print(value);
                 print(values);
                 // todo.forEach((element) {
-      
+
                 //  // i ==  todo.where((element) => true).length;
                 //   element.body == "fjffj";
                 //   element.todoChecker == true;
@@ -88,21 +128,21 @@ class _HomepageState extends State<Homepage> {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       DateTime now = DateTime.now();
-                     // DateTime date = DateTime(now.year, now.month, now.day);
+                      // DateTime date = DateTime(now.year, now.month, now.day);
                       //   final List <TodoModel> todo = [];
-      
+
                       //  // var i = todo.where((x){  } ).length;
                       //   var v = todo.indexWhere(( element) => element.todoChecker == true).round();
                       //   var k = todo.indexWhere(( element) => element.todoChecker == false).bitLength + 1;
-      
+
                       // for (var i in state.todo) {
                       //   i == todo.todoChecker;
-      
+
                       // //  for ( var n in todo.todoChecker ){
-      
+
                       // //  }
                       // }
-      
+
                       // for ( var i in state.todo ){
                       //       todo.todoChecker == true ;
                       //       i = todo.todoChecker.
@@ -580,7 +620,8 @@ class _HomepageState extends State<Homepage> {
       children: [
         Consumer<TodolistServices>(
           builder: (context, state, _) {
-            if (state.todo.isEmpty) {
+            List todo = [] ;
+            if (todo.isEmpty) {
               return Center(
                   child: Column(
                 children: [
@@ -599,13 +640,16 @@ class _HomepageState extends State<Homepage> {
                 ],
               ));
             }
-            if (state.todo.isNotEmpty) {
+            if (todo.isNotEmpty) {
+               
               return ListView.builder(
-                padding: EdgeInsets.all(2),
+                padding: const EdgeInsets.all(2),
                 shrinkWrap: true,
-                itemCount: state.todo.length,
+                itemCount: boxPersons.length,
+                //itemCount: _todos.length,
                 itemBuilder: (context, index) {
-                  TodoModel todo = state.todo.reversed.toList()[index];
+                  
+                  Todoadapter todo1 = boxPersons.getAt(index);
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
@@ -614,14 +658,14 @@ class _HomepageState extends State<Homepage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              context.read<TodolistServices>().updateTodo(
-                                    todo.copyWith(
-                                      todoChecker: !todo.todoChecker,
-                                    ),
-                                  );
+                              // context.read<TodolistServices>().updateTodo(
+                              //       todo.copyWith(
+                              //         todoChecker: !todo.todoChecker,
+                              //       ),
+                              //     );
                             },
                             child: CircleAvatar(
-                              backgroundColor: todo.todoChecker == true
+                              backgroundColor: todo1.todoChecker! == true
                                   ? Colors.green
                                   : Colors.red,
                             ),
@@ -653,7 +697,7 @@ class _HomepageState extends State<Homepage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              todo.title,
+                                              todo1.title!,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                   overflow:
@@ -663,7 +707,7 @@ class _HomepageState extends State<Homepage> {
                                                   fontSize: 15),
                                             ),
                                             Text(
-                                              todo.body,
+                                              todo1.body!,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               softWrap: false,
@@ -691,11 +735,11 @@ class _HomepageState extends State<Homepage> {
                                   onTap: () {
                                     context
                                         .read<TodolistServices>()
-                                        .deleteTodo(todo);
+                                        .deleteTodo(todo as TodoModel);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: todo.todoChecker == true
+                                      color: todo1.todoChecker == true
                                           ? Colors.green
                                           : Colors.red,
                                       borderRadius: BorderRadius.only(
@@ -719,7 +763,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Text(
-                            todo.date,
+                            todo1.date,
                             style: TextStyle(color: Colors.black, fontSize: 10),
                           )
                         ],
@@ -912,12 +956,12 @@ class _HomepageState extends State<Homepage> {
                             onTap: () {
                               context.read<TodolistServices>().updateTodo(
                                     todo.copyWith(
-                                      todoChecker: !todo.todoChecker,
+                                      todoChecker: !todo.todoChecker!,
                                     ),
                                   );
                             },
                             child: CircleAvatar(
-                              backgroundColor: todo.todoChecker == true
+                              backgroundColor: todo.todoChecker! == true
                                   ? Colors.green
                                   : Colors.red,
                             ),
@@ -949,7 +993,7 @@ class _HomepageState extends State<Homepage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              todo.title,
+                                              todo.title!,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                   overflow:
@@ -959,7 +1003,7 @@ class _HomepageState extends State<Homepage> {
                                                   fontSize: 15),
                                             ),
                                             Text(
-                                              todo.body,
+                                              todo.body!,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               softWrap: false,
@@ -1015,7 +1059,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Text(
-                            todo.date,
+                            todo.date!,
                             style: TextStyle(color: Colors.black, fontSize: 10),
                           )
                         ],
@@ -1065,7 +1109,7 @@ class _HomepageState extends State<Homepage> {
                 padding: EdgeInsets.all(2),
                 shrinkWrap: true,
                 itemCount: state.todo
-                    .where((item) => item.todoChecker == false)
+                    .where((item) => item.todoChecker! == false)
                     .length,
                 itemBuilder: (context, index) {
                   // TodoModel todo = state.todo.reversed.toList()[index];
@@ -1082,7 +1126,7 @@ class _HomepageState extends State<Homepage> {
                             onTap: () {
                               context.read<TodolistServices>().updateTodo(
                                     todo.copyWith(
-                                      todoChecker: !todo.todoChecker,
+                                      todoChecker: !todo.todoChecker!,
                                     ),
                                   );
                             },
@@ -1119,7 +1163,7 @@ class _HomepageState extends State<Homepage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              todo.title,
+                                              todo.title!,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                   overflow:
@@ -1129,7 +1173,7 @@ class _HomepageState extends State<Homepage> {
                                                   fontSize: 15),
                                             ),
                                             Text(
-                                              todo.body,
+                                              todo.body!,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               softWrap: false,
@@ -1185,7 +1229,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Text(
-                            todo.date,
+                            todo.date!,
                             style: TextStyle(color: Colors.black, fontSize: 10),
                           )
                         ],
@@ -1246,7 +1290,7 @@ class _HomepageState extends State<Homepage> {
     }
 
     showModalBottomSheet(
-       isScrollControlled: true,
+        isScrollControlled: true,
         showDragHandle: true,
         elevation: 0,
         context: context,
@@ -1257,7 +1301,6 @@ class _HomepageState extends State<Homepage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: Column(
@@ -1324,7 +1367,7 @@ class _HomepageState extends State<Homepage> {
                             fontWeight: FontWeight.w700),
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (todo != null) {
                             context.read<TodolistServices>().updateTodo(
                                   todo.copyWith(
@@ -1339,16 +1382,34 @@ class _HomepageState extends State<Homepage> {
                                 .showSnackBar(SnackBar(content: Text('data')));
                             return;
                           } else {
-                            DateTime dates = DateTime.now();
-                            TodoModel todo = TodoModel(
-                              id: random.nextInt(1000),
-                              title: titleController.text,
-                              body: bodyController.text,
-                              todoChecker: false,
-                              date:
-                                  "${dates.hour}:${dates.minute}:${dates.second}",
-                            );
-                            context.read<TodolistServices>().addTodo(todo);
+                            setState(() {
+                              DateTime dates = DateTime.now();
+
+                              boxPersons.put(
+                                  'key_${titleController.text}',
+                                  Todoadapter(
+                                      body: bodyController.text,
+                                      id: random.nextInt(1000),
+                                      date:
+                                          "${dates.hour}:${dates.minute}:${dates.second}",
+                                      title: titleController.text,
+                                      todoChecker: false));
+                            });
+
+                            print(titleController.text);
+                            //DateTime dates = DateTime.now();
+                            // TodoModel todo = TodoModel(
+                            //   TodoModel.new,
+                            //   id: random.nextInt(1000),
+                            //   title: titleController.text,
+                            //   body: bodyController.text,
+                            //   todoChecker: false,
+                            //   date:
+                            //       "${dates.hour}:${dates.minute}:${dates.second}",
+                            // );
+
+                            //context.read<TodolistServices>().addTodo(todo);
+                            print(bodyController.text);
                           }
                           Navigator.pop(context);
                         },

@@ -1,17 +1,17 @@
 class TodoModel {
-  final int id;
-  final String title;
-  final String body;
-   final bool todoChecker;
-  final String date;
+  final int? id;
+  final String? title;
+  final String? body;
+   final bool? todoChecker;
+  final String? date;
 
-  const TodoModel(
+  const TodoModel(read, 
   {  
-   required this.id, 
-   required this.title, 
-   required this.body, 
-   required this.todoChecker, 
-   required this.date});
+    this.id, 
+    this.title, 
+    this.body, 
+   this.todoChecker, 
+   this.date});
 
     TodoModel copyWith(
      {
@@ -24,7 +24,7 @@ class TodoModel {
 
     ){
 return TodoModel(
-  id: id ?? this.id, 
+  "",id: id ?? this.id, 
   title: title ?? this.title, 
   body: body ?? this.body, 
   todoChecker: todoChecker ?? this.todoChecker, 
