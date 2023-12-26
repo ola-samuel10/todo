@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/bloc/todo_bloc.dart';
+import 'package:todo/view/data/all_todo.dart';
+import 'package:todo/view/data/completed_todo.dart';
 import 'package:todo/view/data/create_todo.dart';
+import 'package:todo/view/data/date_widget.dart';
+import 'package:todo/view/data/pending_todo.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,6 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List categories = [
+      const AllTodo(),
+      const CompletedTodo(),
+      const PendingTodo(),
+      const DateWidget(),
+    ];
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: BlocBuilder<TodoBloc, TodoState>(
