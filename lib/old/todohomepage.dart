@@ -164,7 +164,7 @@ class _HomepageState extends State<Homepage> {
                                     color: Colors.purple,
                                     borderRadius: BorderRadius.circular(12)),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -206,7 +206,7 @@ class _HomepageState extends State<Homepage> {
                                     color: Colors.green,
                                     borderRadius: BorderRadius.circular(12)),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -290,7 +290,7 @@ class _HomepageState extends State<Homepage> {
                                     color: Colors.orange,
                                     borderRadius: BorderRadius.circular(12)),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -538,7 +538,7 @@ class _HomepageState extends State<Homepage> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Icon(Icons.add)),
+                        child: const Icon(Icons.add)),
                   )
                 ],
               ),
@@ -566,7 +566,7 @@ class _HomepageState extends State<Homepage> {
                                       : Colors.grey,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 3,
                               ),
                               Container(
@@ -620,7 +620,7 @@ class _HomepageState extends State<Homepage> {
       children: [
         Consumer<TodolistServices>(
           builder: (context, state, _) {
-            List todo = [] ;
+            List todo = [];
             if (todo.isEmpty) {
               return Center(
                   child: Column(
@@ -641,14 +641,12 @@ class _HomepageState extends State<Homepage> {
               ));
             }
             if (todo.isNotEmpty) {
-               
               return ListView.builder(
                 padding: const EdgeInsets.all(2),
                 shrinkWrap: true,
                 itemCount: boxPersons.length,
                 //itemCount: _todos.length,
                 itemBuilder: (context, index) {
-                  
                   Todoadapter todo1 = boxPersons.getAt(index);
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -727,7 +725,7 @@ class _HomepageState extends State<Homepage> {
                                               //context: context,
                                             );
                                           },
-                                          icon: Icon(Icons.edit))
+                                          icon: const Icon(Icons.edit))
                                     ],
                                   ),
                                 ),
@@ -742,7 +740,7 @@ class _HomepageState extends State<Homepage> {
                                       color: todo1.todoChecker == true
                                           ? Colors.green
                                           : Colors.red,
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(12),
                                           bottomRight: Radius.circular(12)),
                                     ),
@@ -764,7 +762,8 @@ class _HomepageState extends State<Homepage> {
                           ),
                           Text(
                             todo1.date,
-                            style: TextStyle(color: Colors.black, fontSize: 10),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 10),
                           )
                         ],
                       ),
@@ -787,13 +786,13 @@ class _HomepageState extends State<Homepage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundColor: Colors.green,
             ),
             Container(
               height: 70,
               width: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(boxShadow: [
+              decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
                     color: Color.fromARGB(255, 218, 216, 216),
                     spreadRadius: 0.2,
@@ -817,23 +816,23 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            Text(
+            const Text(
               '9:50. pm',
               style: TextStyle(color: Colors.black, fontSize: 10),
             )
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundColor: Colors.green,
             ),
             Container(
               height: 70,
               width: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(boxShadow: [
+              decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
                     color: Color.fromARGB(255, 218, 216, 216),
                     spreadRadius: 0.2,
@@ -857,23 +856,23 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            Text(
+            const Text(
               '9:50. pm',
               style: TextStyle(color: Colors.black, fontSize: 10),
             )
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundColor: Colors.red,
             ),
             Container(
               height: 70,
               width: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(boxShadow: [
+              decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
                     color: Color.fromARGB(255, 218, 216, 216),
                     spreadRadius: 0.2,
@@ -897,7 +896,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            Text(
+            const Text(
               '9:50. pm',
               style: TextStyle(color: Colors.black, fontSize: 10),
             )
@@ -936,7 +935,7 @@ class _HomepageState extends State<Homepage> {
             }
             if (state.todo.isNotEmpty) {
               return ListView.builder(
-                padding: EdgeInsets.all(2),
+                padding: const EdgeInsets.all(2),
                 shrinkWrap: true,
                 itemCount:
                     state.todo.where((item) => item.todoChecker == true).length,
@@ -1023,7 +1022,7 @@ class _HomepageState extends State<Homepage> {
                                               //context: context,
                                             );
                                           },
-                                          icon: Icon(Icons.edit))
+                                          icon: const Icon(Icons.edit))
                                     ],
                                   ),
                                 ),
@@ -1038,7 +1037,7 @@ class _HomepageState extends State<Homepage> {
                                       color: todo.todoChecker == true
                                           ? Colors.green
                                           : Colors.red,
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(12),
                                           bottomRight: Radius.circular(12)),
                                     ),
@@ -1060,7 +1059,8 @@ class _HomepageState extends State<Homepage> {
                           ),
                           Text(
                             todo.date!,
-                            style: TextStyle(color: Colors.black, fontSize: 10),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 10),
                           )
                         ],
                       ),
@@ -1106,7 +1106,7 @@ class _HomepageState extends State<Homepage> {
             }
             if (state.todo.isNotEmpty) {
               return ListView.builder(
-                padding: EdgeInsets.all(2),
+                padding: const EdgeInsets.all(2),
                 shrinkWrap: true,
                 itemCount: state.todo
                     .where((item) => item.todoChecker! == false)
@@ -1193,7 +1193,7 @@ class _HomepageState extends State<Homepage> {
                                               //context: context,
                                             );
                                           },
-                                          icon: Icon(Icons.edit))
+                                          icon: const Icon(Icons.edit))
                                     ],
                                   ),
                                 ),
@@ -1208,7 +1208,7 @@ class _HomepageState extends State<Homepage> {
                                       color: todo.todoChecker == true
                                           ? Colors.green
                                           : Colors.red,
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(12),
                                           bottomRight: Radius.circular(12)),
                                     ),
@@ -1230,7 +1230,8 @@ class _HomepageState extends State<Homepage> {
                           ),
                           Text(
                             todo.date!,
-                            style: TextStyle(color: Colors.black, fontSize: 10),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 10),
                           )
                         ],
                       ),
@@ -1252,15 +1253,15 @@ class _HomepageState extends State<Homepage> {
       children: [
         TableCalendar(
           selectedDayPredicate: (day) {
-            var _selectedDay = DateTime.now();
-            return isSameDay(_selectedDay, day);
+            var selectedDay = DateTime.now();
+            return isSameDay(selectedDay, day);
           },
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
-              var _selectedDay = DateTime.now();
-              var _focusedDay = DateTime.now();
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay; // update `_focusedDay` here as well
+              var selectedDay = DateTime.now();
+              var focusedDay = DateTime.now();
+              selectedDay = selectedDay;
+              focusedDay = focusedDay; // update `_focusedDay` here as well
             });
           },
           calendarFormat: CalendarFormat.month,
@@ -1290,146 +1291,147 @@ class _HomepageState extends State<Homepage> {
     }
 
     showModalBottomSheet(
-        isScrollControlled: true,
-        showDragHandle: true,
-        elevation: 0,
-        context: context,
-        builder: (_) {
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'asset/img/note.png',
-                        height: 100,
-                        width: 100,
+      isScrollControlled: true,
+      showDragHandle: true,
+      elevation: 0,
+      context: context,
+      builder: (_) {
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'asset/img/note.png',
+                      height: 100,
+                      width: 100,
+                    ),
+                    Text(
+                      todo != null ? 'Edit Your Task' : 'Add New Task',
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
                       ),
-                      Text(
-                        todo != null ? 'Edit Your Task' : 'Add New Task',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    ),
+                    const Text(
+                      'You can always change your plan, but only if you have one......have a list of what I want to achieve',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    TextField(
+                      controller: titleController,
+                      keyboardType: TextInputType.name,
+                      decoration: const InputDecoration(
+                        labelText: 'Todo title',
+                        //labelStyle: TextStyle(color: Colors.white)
                       ),
-                      const Text(
-                        'You can always change your plan, but only if you have one......have a list of what I want to achieve',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: bodyController,
+                      minLines: 6,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        alignLabelWithHint: true,
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter text',
                       ),
-                      TextField(
-                        controller: titleController,
-                        keyboardType: TextInputType.name,
-                        decoration: const InputDecoration(
-                          labelText: 'Todo title',
-                          //labelStyle: TextStyle(color: Colors.white)
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: bodyController,
-                        minLines: 6,
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter text',
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-                Container(
-                  //margin: EdgeInsets.all(0),
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        todo != null ? "Edit Task" : 'Add Task',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          if (todo != null) {
-                            context.read<TodolistServices>().updateTodo(
-                                  todo.copyWith(
-                                    title: titleController.text,
-                                    body: bodyController.text,
-                                  ),
-                                );
-                          } else if (titleController.text == '' ||
-                              bodyController.text == '') {
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(content: Text('data')));
-                            return;
-                          } else {
-                            setState(() {
-                              DateTime dates = DateTime.now();
-
-                              boxPersons.put(
-                                  'key_${titleController.text}',
-                                  Todoadapter(
-                                      body: bodyController.text,
-                                      id: random.nextInt(1000),
-                                      date:
-                                          "${dates.hour}:${dates.minute}:${dates.second}",
-                                      title: titleController.text,
-                                      todoChecker: false));
-                            });
-
-                            print(titleController.text);
-                            //DateTime dates = DateTime.now();
-                            // TodoModel todo = TodoModel(
-                            //   TodoModel.new,
-                            //   id: random.nextInt(1000),
-                            //   title: titleController.text,
-                            //   body: bodyController.text,
-                            //   todoChecker: false,
-                            //   date:
-                            //       "${dates.hour}:${dates.minute}:${dates.second}",
-                            // );
-
-                            //context.read<TodolistServices>().addTodo(todo);
-                            print(bodyController.text);
-                          }
+              ),
+              Container(
+                //margin: EdgeInsets.all(0),
+                height: 50,
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      todo != null ? "Edit Task" : 'Add Task',
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        if (todo != null) {
+                          context.read<TodolistServices>().updateTodo(
+                                todo.copyWith(
+                                  title: titleController.text,
+                                  body: bodyController.text,
+                                ),
+                              );
+                        } else if (titleController.text == '' ||
+                            bodyController.text == '') {
                           Navigator.pop(context);
-                        },
-                        child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Icon(
-                              todo != null ? Icons.edit : Icons.send,
-                              color: Colors.white,
-                            )),
-                      )
-                    ],
-                  ),
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('data')));
+                          return;
+                        } else {
+                          setState(() {
+                            DateTime dates = DateTime.now();
+
+                            boxPersons.put(
+                                'key_${titleController.text}',
+                                Todoadapter(
+                                    body: bodyController.text,
+                                    id: random.nextInt(1000),
+                                    date:
+                                        "${dates.hour}:${dates.minute}:${dates.second}",
+                                    title: titleController.text,
+                                    todoChecker: false));
+                          });
+
+                          print(titleController.text);
+                          //DateTime dates = DateTime.now();
+                          // TodoModel todo = TodoModel(
+                          //   TodoModel.new,
+                          //   id: random.nextInt(1000),
+                          //   title: titleController.text,
+                          //   body: bodyController.text,
+                          //   todoChecker: false,
+                          //   date:
+                          //       "${dates.hour}:${dates.minute}:${dates.second}",
+                          // );
+
+                          //context.read<TodolistServices>().addTodo(todo);
+                          print(bodyController.text);
+                        }
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Icon(
+                            todo != null ? Icons.edit : Icons.send,
+                            color: Colors.white,
+                          )),
+                    )
+                  ],
                 ),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
