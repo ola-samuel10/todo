@@ -1,63 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:todo/todoadapter.dart';
-import 'package:todo/todo_services.dart';
-import 'package:todo/todohomepage.dart';
-import 'package:hive/hive.dart';
-import 'package:todo/todolist_model.dart';
-import 'package:todo/todolist_services.dart';
-
-import 'box.dart';
-
-
+import 'package:todo/bloc/todo_bloc.dart';
+import 'package:todo/hive_database.dart';
+import 'package:todo/model/todo_model.dart';
+import 'package:todo/view/home_screen.dart';
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
-  Hive.registerAdapter(TodoadapterAdapter());
-  boxPersons = await Hive.openBox<Todoadapter>('personBox');
-  //var bo = await Hive.openBox('testBox');
+  Hive.registerAdapter(TodoAdapter());
 
-  
- // await Hive.openBox<TodoModel>('todobox');
+  final hiveDatebase = HiveDatabase();
+  await hiveDatebase.openBox();
 
-
-  runApp(const MyApp());
+  runApp(MyApp(hiveDatabase: hiveDatebase));
 }
-// @HiveType(typeId: 0)
-// @HiveType(typeId: 1)
-
-
-
-
-
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final HiveDatabase? _hiveDatabase;
+  const MyApp({Key? key, HiveDatabase? hiveDatabase})
+      : _hiveDatabase = hiveDatabase,
+        super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        //ChangeNotifierProvider(create: (_) => MovieService()),
-        ChangeNotifierProvider(create: (_) => TodolistServices()),
-      ],
-      child: ValueListenableBuilder(
-        valueListenable: Hive.box<Todoadapter>('personBox').listenable(),
-        builder: (context, value, child) {
-          //bool theme = value.get('theme', defaultValue: true);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
+    return RepositoryProvider.value(
+      value: _hiveDatabase,
+      child: BlocProvider(
+        create: (context) =>
+            TodoBloc(hiveDatabase: _hiveDatabase!)..add(LoadTodo()),
+        child: MaterialApp(
+          title: 'Todo App',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: const MaterialColor(
+              0xFF000A1F,
+              <int, Color>{
+                50: Color(0xFF000A1F),
+                100: Color(0xFF000A1F),
+                200: Color(0xFF000A1F),
+                300: Color(0xFF000A1F),
+                400: Color(0xFF000A1F),
+                500: Color(0xFF000A1F),
+                600: Color(0xFF000A1F),
+                700: Color(0xFF000A1F),
+              },
             ),
-            home: const Homepage(),
-          );
-        },
+          ),
+          home: const HomeScreen(),
+        ),
       ),
     );
   }
