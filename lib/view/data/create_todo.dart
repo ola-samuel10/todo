@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/bloc/todo_bloc.dart';
 import 'package:todo/model/todo_model.dart';
+import 'package:todo/view/data/datepicker.dart';
 
 class CreateTodo extends StatefulWidget {
   final Todo? todo;
@@ -19,6 +20,7 @@ class _CreateTodoState extends State<CreateTodo> {
   var formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
+  TextEditingController dob = TextEditingController();
 
   @override
   void initState() {
@@ -83,6 +85,26 @@ class _CreateTodoState extends State<CreateTodo> {
                           labelText: 'Enter text',
                         ),
                       ),
+                      TextFormField(
+                        controller: dob,
+                        readOnly: true,
+                        // hintText: '10/12/2006',
+                        // label: 'Date of Birth',
+                        keyboardType: TextInputType.text,
+                        // validator: (p0) => Validators.validate(p0!),
+                        onTap: () {
+                          getDatePickerFunc(
+                            context,
+                            (date, raw) {
+                              dob.text = raw.toString();
+                            },
+                            time: true,
+                            initialDate: DateTime.now(),
+                            firstTime: DateTime.now(),
+                            lastDate: DateTime(2056),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -91,7 +113,7 @@ class _CreateTodoState extends State<CreateTodo> {
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.end,
               //   children: [
-                  
+
               //     GestureDetector(
               //       child: Container(
               //         height: 50,
@@ -129,13 +151,15 @@ class _CreateTodoState extends State<CreateTodo> {
               //           ],
               //         ),
               //       ),
-                    
+
               //     ),
               //   ],
               // ),
-             const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               GestureDetector(
-                 onTap: () async {
+                onTap: () async {
                   if (formKey.currentState!.validate()) {
                     if (widget.todo != null) {
                       context.read<TodoBloc>().add(
