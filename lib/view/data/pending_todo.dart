@@ -27,7 +27,7 @@ class PendingTodo extends StatelessWidget {
                     width: 100,
                   ),
                   const Text(
-                    'No Completed Task',
+                    'No Pending Task',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
@@ -66,6 +66,11 @@ class PendingTodo extends StatelessWidget {
                             backgroundColor: todo1.todoChecker == true
                                 ? Colors.green
                                 : Colors.red,
+                                child: Icon(
+                                todo1.todoChecker == true
+                                    ? Icons.done
+                                    : Icons.remove,
+                                color: Colors.white),
                           ),
                         ),
                         Container(
@@ -157,7 +162,7 @@ class PendingTodo extends StatelessWidget {
                                     children: [
                                       Icon(Icons.delete, color: Colors.white),
                                       Text(
-                                        'delete',
+                                        'Delete',
                                         style: TextStyle(color: Colors.white),
                                       )
                                     ],

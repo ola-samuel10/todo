@@ -265,40 +265,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   const SizedBox(height: 15),
-                  Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Todo List',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                          ),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        showDragHandle: true,
+                        elevation: 0,
+                        context: context,
+                        builder: (_) {
+                          return const CreateTodo();
+                        },
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              showDragHandle: true,
-                              elevation: 0,
-                              context: context,
-                              builder: (_) {
-                                return const CreateTodo();
-                              },
-                            );
-                          },
-                          child: Container(
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text(
+                            'Todo List',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Container(
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
@@ -306,9 +306,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: const Icon(Icons.add),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),

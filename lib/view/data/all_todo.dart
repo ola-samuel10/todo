@@ -41,7 +41,7 @@ class AllTodo extends StatelessWidget {
               shrinkWrap: true,
               itemCount: state.todo.length,
               itemBuilder: (context, index) {
-                var todo1 = state.todo[index];
+                var todo1 = state.todo.reversed.toList()[index];
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SingleChildScrollView(
@@ -62,6 +62,11 @@ class AllTodo extends StatelessWidget {
                             backgroundColor: todo1.todoChecker == true
                                 ? Colors.green
                                 : Colors.red,
+                                child: Icon(
+                                todo1.todoChecker == true
+                                    ? Icons.done
+                                    : Icons.remove,
+                                color: Colors.white),
                           ),
                         ),
                         Container(
@@ -153,7 +158,7 @@ class AllTodo extends StatelessWidget {
                                     children: [
                                       Icon(Icons.delete, color: Colors.white),
                                       Text(
-                                        'delete',
+                                        'Delete',
                                         style: TextStyle(color: Colors.white),
                                       )
                                     ],

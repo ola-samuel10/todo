@@ -66,6 +66,9 @@ class CompletedTodo extends StatelessWidget {
                             backgroundColor: todo1.todoChecker == true
                                 ? Colors.green
                                 : Colors.red,
+                                child: Icon(todo1.todoChecker == true
+                                ? Icons.done
+                                : Icons.remove, color :Colors.white),
                           ),
                         ),
                         Container(
@@ -157,7 +160,7 @@ class CompletedTodo extends StatelessWidget {
                                     children: [
                                       Icon(Icons.delete, color: Colors.white),
                                       Text(
-                                        'delete',
+                                        'Delete',
                                         style: TextStyle(color: Colors.white),
                                       )
                                     ],
